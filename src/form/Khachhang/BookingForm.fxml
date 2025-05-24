@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.text.Text?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.KhachHang.KHManagerController"
+      stylesheets="@booking-style.css"
+      alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Thủ tục đặt phòng"
+           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Tìm khách hàng: "
+               style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #151414;"/>
+        <TextField fx:id="searchField" promptText="Nhập tên hoặc số điện thoại khách hàng..."
+                   style="-fx-pref-width: 300px;" onKeyReleased="#handleSearchInput"/>
+        <Button fx:id="searchButton" text="Tìm kiếm"
+                style="-fx-background-color: linear-gradient(to right, #3b82f6, #2563eb); -fx-text-fill: white;"/>
+    </HBox>
+
+    <TableView fx:id="tableKhachHang" prefWidth="800" prefHeight="500" styleClass="table-view">
+        <columns>
+            <TableColumn fx:id="colHoTen" text="Họ tên" prefWidth="150"/>
+            <TableColumn fx:id="colCCCD" text="CCCD" prefWidth="120"/>
+            <TableColumn fx:id="colSDT" text="SĐT" prefWidth="100"/>
+            <TableColumn fx:id="colEmail" text="Email" prefWidth="150"/>
+            <TableColumn fx:id="colNgaySinh" text="Ngày sinh" prefWidth="100"/>
+            <TableColumn fx:id="colGioiTinh" text="Giới tính" prefWidth="80"/>
+            <TableColumn fx:id="colMaKH" text="Mã KH" prefWidth="100"/>
+            <TableColumn fx:id="colDiaChi" text="Địa chỉ" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+
+    <ScrollPane fitToWidth="true" fitToHeight="true" pannable="true"
+                style="-fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);">
+        <VBox spacing="20" alignment="TOP_LEFT"
+              style="-fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);"
+              VBox.vgrow="ALWAYS">
+
+
+
+            <TitledPane text="Đăng ký khách hàng mới" expanded="false" fx:id="infoFormID"
+                        style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #161617; -fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);"
+                        styleClass="titled-pane">
+                <content>
+                    <VBox spacing="15" alignment="CENTER"
+                          style="-fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);">
+
+
+                        <!-- Hàng 1: Họ tên & CCCD -->
+                        <HBox spacing="20" alignment="CENTER_LEFT">
+                            <Label text="Họ và tên:" minWidth="80"/>
+                            <TextField fx:id="fullNameField" promptText="Nhập họ và tên" prefWidth="180"/>
+
+                            <Label text="CCCD:" minWidth="55"/>
+                            <TextField fx:id="cccdField" promptText="Nhập CCCD" prefWidth="180"/>
+                        </HBox>
+
+                        <!-- Hàng 2: SĐT & Ngày sinh -->
+                        <HBox spacing="20" alignment="CENTER_LEFT">
+                            <Label text="Số ĐT:" minWidth="80"/>
+                            <TextField fx:id="phoneField" promptText="Nhập số điện thoại" prefWidth="180"/>
+
+                            <Label text="Ngày sinh:" minWidth="50"/>
+                            <DatePicker fx:id="dobPicker" prefWidth="180"/>
+                        </HBox>
+
+                        <!-- Hàng 3: Giới tính & Email -->
+                        <HBox spacing="20" alignment="CENTER_LEFT">
+                            <Label text="Giới tính:" minWidth="80"/>
+                            <ComboBox fx:id="genderComboBox" prefWidth="180" promptText="Chọn giới tính">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="Nam"/>
+                                        <String fx:value="Nữ"/>
+                                    </FXCollections>
+                                </items>
+                            </ComboBox>
+
+                            <Label text="Email:" minWidth="55"/>
+                            <TextField fx:id="emailField" promptText="Nhập email" prefWidth="180"/>
+                        </HBox>
+
+                        <!-- Hàng nút -->
+                        <HBox spacing="10" alignment="CENTER_RIGHT">
+
+                            <Text fx:id="txtStatusND" fill="#f70000" text="" textAlignment="LEFT"/>
+                            <Button text="Đăng ký" onAction="#handleRegisterAndEdit" fx:id="btnThemSua"
+                                    style="-fx-background-color: linear-gradient(to right, #3b82f6, #2563eb); -fx-text-fill: white; -fx-pref-width: 100px;"/>
+
+                        </HBox>
+                    </VBox>
+                </content>
+            </TitledPane>
+
+            <TitledPane text="Thông tin đặt phòng" expanded="false"
+                        style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #161617; -fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);"
+                        styleClass="titled-pane">
+                <content>
+                    <GridPane hgap="10" vgap="10" alignment="CENTER_LEFT">
+                        <Label text="Loại phòng:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <Label text="THƯỜNG" GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="loaiPhongID"/>
+
+                        <Label text="Đơn giá:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <Label text="9.000.000 VND" GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="donGiaID"/>
+
+                        <Label text="Ngày nhận phòng:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <DatePicker fx:id="checkInDate" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                        <Label text="Ngày trả phòng:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <DatePicker fx:id="checkOutDate" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                        <Label text="Ghi chú:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                        <TextArea fx:id="notesArea" promptText="Ghi chú thêm (nếu có)"
+                                  GridPane.rowIndex="4" GridPane.columnIndex="1"
+                                  style="-fx-pref-height: 100px;"/>
+                        <!--                <TextArea fx:id="notesssa" promptText="Ghi chú thêm (nếu có)"-->
+                        <!--                          GridPane.rowIndex="5" GridPane.columnIndex="1"-->
+                        <!--                          style="-fx-pref-height: 100px;"/>-->
+                    </GridPane>
+                </content>
+            </TitledPane>
+
+
+            <Region style="-fx-pref-height: 200px;"/>
+        </VBox>
+
+    </ScrollPane>
+
+
+    <HBox alignment="CENTER_RIGHT" spacing="20">
+        <Label text="Tổng tiền:"
+               style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-pref-width: 100px;"/>
+        <Label text="9.000.000"
+               style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #333; -fx-pref-width: 150px;"
+               fx:id="tongTienid"/>
+        <Region fx:id="spacer" HBox.hgrow="ALWAYS"/>
+        <Button fx:id="cancelButton" text="Hủy" onAction="#handleHuy"
+                style="-fx-background-color: #e5e7eb; -fx-text-fill: #333; -fx-pref-width: 70px;"/>
+        <Button fx:id="addButton" text="Xác Nhận" onAction="#handleXN"
+                style="-fx-background-color: linear-gradient(to right, #3b82f6, #2563eb); -fx-text-fill: white; -fx-pref-width: 100px;"/>
+    </HBox>
+
+</VBox>

@@ -1,0 +1,209 @@
+/* Nền chính */
+/* Thanh điều hướng */
+.nav-bar {
+    -fx-background-color: #2563EB;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 2);
+}
+
+/* Tiêu đề */
+.title-label {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* Nút điều hướng */
+.nav-button {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-padding: 5 10;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.nav-button:hover {
+    -fx-text-fill: #BFDBFE;
+    -fx-underline: true;
+}
+
+/* Trạng thái đang chọn */
+.nav-button:focused, .nav-button:selected {
+    -fx-background-color: #1E40AF;
+    -fx-text-fill: white;
+    -fx-border-color: #BFDBFE;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-insets: 5 0 0 0;
+}
+
+/* Nhãn người dùng */
+.user-label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 0 10 0 10;
+}
+
+/* Nút đăng xuất */
+.logout-button {
+    -fx-background-color: #DC2626;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-padding: 5 15;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.logout-button:hover {
+    -fx-background-color: #B91C1C;
+}
+/* Thẻ thống kê */
+.stat-card {
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 1);
+}
+
+.stat-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: #1F2937;
+}
+
+.stat-value {
+    -fx-font-size: 20px;
+    -fx-text-fill: #1E3A8A;
+}
+
+/* Trạng thái phòng */
+.room-status-wrapper {
+    -fx-padding: 5;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0, 0, 2);
+}
+
+.room-available-wrapper {
+    -fx-background-color: #BBF7D0;
+    -fx-border-color: #86EFAC;
+    -fx-border-width: 2;
+}
+
+.room-occupied-wrapper {
+    -fx-background-color: #FEF08A;
+    -fx-border-color: #FDE047;
+    -fx-border-width: 2;
+}
+
+.room-cleaning-wrapper {
+    -fx-background-color: #FECACA;
+    -fx-border-color: #FCA5A5;
+    -fx-border-width: 2;
+}
+
+.room-status-card {
+    -fx-padding: 10;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.room-available {
+    -fx-background-color: #DCFCE7;
+}
+
+.room-occupied {
+    -fx-background-color: #FEF9C3;
+}
+
+.room-cleaning {
+    -fx-background-color: #FEE2E2;
+}
+
+.status-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: #1F2937;
+}
+
+.status-value {
+    -fx-font-size: 18px;
+    -fx-text-fill: #1E3A8A;
+}
+
+/* Tiêu đề phần */
+.section-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E3A8A;
+}
+
+/* ComboBox */
+.filter-combo {
+    -fx-background-color: white;
+    -fx-border-color: #D1D5DB;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-font-size: 14px;
+}
+
+.filter-combo:hover {
+    -fx-border-color: #3B82F6;
+}
+
+/* TextField tìm kiếm */
+.search-field {
+    -fx-background-color: white;
+    -fx-border-color: #D1D5DB;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-font-size: 14px;
+    -fx-padding: 8;
+}
+
+.search-field:focused {
+    -fx-border-color: #3B82F6;
+    -fx-border-width: 2;
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #D1D5DB;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.table-view .column-header {
+    -fx-background-color: #E5E7EB;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #F9FAFB;
+}
+
+.table-view .table-row-cell:even {
+    -fx-background-color: white;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #82b7dd;
+}
+.table-view .table-row-cell:filled:selected {
+    -fx-background-color: #F87171; /* đỏ nhạt */
+}
+
+/* Nút đặt phòng */
+.action-button {
+    -fx-background-color: #EF4444;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+}
+
+.action-button:hover {
+    -fx-background-color: #DC2626;
+}

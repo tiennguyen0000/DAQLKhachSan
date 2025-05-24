@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.text.Text?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DVPhong.RManagerController"
+      stylesheets="@booking-style.css"
+      alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Quản lý phòng"
+           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label style="-fx-font-size: 16; -fx-font-weight: bold;" text="Danh sách phòng" fx:id="newPhong"/>
+        <ComboBox fx:id="phongFilterCombo" promptText="Chọn loại phòng" styleClass="filter-combo">
+            <!-- bạn có thể thêm các item mặc định ở đây hoặc bind từ controller -->
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Tất cả"/>
+                    <String fx:value="Thường"/>
+                    <String fx:value="VIP"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="Nhập loại phòng..."
+                   style="-fx-pref-width: 150px;" onKeyReleased="#handleSearchInput"/>
+        <Button fx:id="searchButton" text="Tìm kiếm"
+                style="-fx-background-color: linear-gradient(to right, #3b82f6, #2563eb); -fx-text-fill: white;"/>
+
+    </HBox>
+
+    <TableView fx:id="dvPhongTable" prefHeight="600" prefWidth="600" styleClass="table-view">
+        <columns>
+            <TableColumn fx:id="maDVColumn" text="Mã DV Phòng" prefWidth="100"/>
+            <TableColumn fx:id="loaiPhongColumn" text="Loại phòng" prefWidth="120"/>
+            <TableColumn fx:id="trangThaiColumn" text="Trạng thái" prefWidth="120"/>
+            <TableColumn fx:id="donGiaColumn" text="Đơn giá" prefWidth="80"/>
+            <TableColumn fx:id="moTaColumn" text="Mô tả" prefWidth="200"/>
+        </columns>
+    </TableView>
+
+
+
+    <ScrollPane fitToWidth="true" fitToHeight="true" pannable="true"
+                style="-fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);">
+        <VBox spacing="20" alignment="TOP_LEFT"
+              style="-fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);"
+              VBox.vgrow="ALWAYS">
+
+
+            <TitledPane text="Thêm phòng mới" expanded="false" fx:id="infoFormID"
+                        style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #161617; -fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);"
+                        styleClass="titled-pane">
+                <content>
+                    <VBox spacing="15" alignment="CENTER"
+                          style="-fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);">
+
+                        <GridPane hgap="20" vgap="15">
+                            <!-- Loại phòng -->
+                            <Label text="Loại phòng:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                            <TextField fx:id="txtLoaiPhong" promptText="Thường / VIP"
+                                       GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="250"/>
+
+                            <!-- Mô tả -->
+                            <Label text="Mô tả:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                            <TextField fx:id="txtMoTa" promptText="VD: Giường đôi, có tủ lạnh"
+                                       GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                            <!-- Đơn giá -->
+                            <Label text="Đơn giá:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                            <TextField fx:id="txtDonGia" promptText="VD: 500000"
+                                       GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                            <!-- Trạng thái -->
+                            <Label text="Trạng thái:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                            <ComboBox fx:id="comboTrangThai" prefWidth="200"
+                                      GridPane.rowIndex="3" GridPane.columnIndex="1">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="trống"/>
+                                        <String fx:value="đã được đặt"/>
+                                        <String fx:value="bảo trì"/>
+                                    </FXCollections>
+                                </items>
+                            </ComboBox>
+                        </GridPane>
+
+                        <!-- Thông báo & nút -->
+                        <HBox alignment="CENTER_RIGHT" spacing="10">
+                            <Text fx:id="txtStatusND" fill="#f70000" text="" textAlignment="LEFT"/>
+                            <Button fx:id="btnThemSua" text="Thêm" onAction="#handleLuu"
+                                    style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-font-weight: bold;" />
+                        </HBox>
+
+                    </VBox>
+                </content>
+            </TitledPane>
+
+            <Region style="-fx-pref-height: 200px;"/>
+        </VBox>
+
+    </ScrollPane>
+
+</VBox>

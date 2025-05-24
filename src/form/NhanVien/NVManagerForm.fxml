@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.text.Text?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NhanVien.NVManagerController"
+      stylesheets="@style.css"
+      alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Quản lý nhân viên"
+           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Tìm nhân viên: "
+               style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #151414;"/>
+        <TextField fx:id="searchField" promptText="Nhập tên hoặc số điện thoại nhân viên..."
+                   style="-fx-pref-width: 300px;" />
+        <Button fx:id="searchButton" text="Tìm kiếm"
+                style="-fx-background-color: linear-gradient(to right, #3b82f6, #2563eb); -fx-text-fill: white;"/>
+    </HBox>
+
+    <TableView fx:id="tableNhanVien" prefWidth="800" prefHeight="500" styleClass="table-view">
+        <columns>
+            <TableColumn fx:id="colHoTen" text="Họ tên" prefWidth="150"/>
+            <TableColumn fx:id="colCCCD" text="CCCD" prefWidth="120"/>
+            <TableColumn fx:id="colSDT" text="SĐT" prefWidth="100"/>
+            <TableColumn fx:id="colEmail" text="Email" prefWidth="150"/>
+            <TableColumn fx:id="colNgaySinh" text="Ngày sinh" prefWidth="100"/>
+            <TableColumn fx:id="colGioiTinh" text="Giới tính" prefWidth="80"/>
+            <TableColumn fx:id="colMaNV" text="Mã NV" prefWidth="100"/>
+            <TableColumn fx:id="colDiaChi" text="Địa chỉ" prefWidth="150"/>
+            <TableColumn fx:id="colNgayVaoLam" text="Ngày vào làm" prefWidth="120"/>
+            <TableColumn fx:id="colLuong" text="Lương" prefWidth="100"/>
+            <TableColumn fx:id="colChucVu" text="Chức vụ" prefWidth="100"/>
+            <TableColumn fx:id="colMaQL" text="Mã QL" prefWidth="100"/>
+
+        </columns>
+    </TableView>
+
+
+    <ScrollPane fitToWidth="true" fitToHeight="true" pannable="true"
+                style="-fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);">
+        <VBox spacing="20" alignment="TOP_LEFT"
+              style="-fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);"
+              VBox.vgrow="ALWAYS">
+
+
+            <TitledPane text="Thêm nhân viên" expanded="false" fx:id="infoFormID"
+                        style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #161617; -fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);"
+                        styleClass="titled-pane">
+                <content>
+                    <VBox spacing="15" alignment="CENTER"
+                          style="-fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);"
+                          xmlns:fx="http://javafx.com/fxml">
+
+                        <!-- Hàng 1: Họ tên & CCCD -->
+                        <HBox spacing="20" alignment="CENTER_LEFT">
+                            <Label text="Họ và tên:" minWidth="80"/>
+                            <TextField fx:id="fullNameField" promptText="Nhập họ và tên" prefWidth="180"/>
+
+                            <Label text="CCCD:" minWidth="100"/>
+                            <TextField fx:id="cccdField" promptText="Nhập CCCD" prefWidth="180"/>
+                        </HBox>
+
+                        <!-- Hàng 2: SĐT & Ngày sinh -->
+                        <HBox spacing="20" alignment="CENTER_LEFT">
+                            <Label text="Số ĐT:" minWidth="80"/>
+                            <TextField fx:id="phoneField" promptText="Nhập số điện thoại" prefWidth="180"/>
+
+                            <Label text="Ngày sinh:" minWidth="100"/>
+                            <DatePicker fx:id="dobPicker" prefWidth="180"/>
+                        </HBox>
+
+                        <!-- Hàng 3: Giới tính & Email -->
+                        <HBox spacing="20" alignment="CENTER_LEFT">
+                            <Label text="Giới tính:" minWidth="80"/>
+                            <ComboBox fx:id="genderComboBox" prefWidth="180" promptText="Chọn giới tính">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="Nam"/>
+                                        <String fx:value="Nữ"/>
+                                    </FXCollections>
+                                </items>
+                            </ComboBox>
+
+                            <Label text="Email:" minWidth="100"/>
+                            <TextField fx:id="emailField" promptText="Nhập email" prefWidth="180"/>
+                        </HBox>
+
+                        <!-- Hàng 4: Địa chỉ & Ngày vào làm -->
+                        <HBox spacing="20" alignment="CENTER_LEFT">
+                            <Label text="Địa chỉ:" minWidth="80"/>
+                            <TextField fx:id="diaChiField" promptText="Nhập địa chỉ" prefWidth="180"/>
+
+                            <Label text="Ngày vào làm:" minWidth="100"/>
+                            <DatePicker fx:id="ngayVaoLamPicker" prefWidth="180"/>
+                        </HBox>
+
+                        <!-- Hàng 5: Lương & Chức vụ -->
+                        <HBox spacing="20" alignment="CENTER_LEFT">
+                            <Label text="Lương:" minWidth="80"/>
+                            <TextField fx:id="luongField" promptText="Nhập lương" prefWidth="180"/>
+
+                            <Label text="Mật khẩu:" minWidth="100"/>
+                            <PasswordField fx:id="passwordField" promptText="Nhập mật khẩu" prefWidth="180"/>
+                        </HBox>
+
+                        <!-- Hàng 6: Mã quản lý -->
+                        <HBox spacing="20" alignment="CENTER_LEFT">
+                            <Label text="Mã QL:" minWidth="80"/>
+                            <TextField fx:id="maQLField" promptText="VD: QL01" prefWidth="180"/>
+
+
+                        </HBox>
+
+                        <!-- Nút và thông báo -->
+                        <HBox spacing="10" alignment="CENTER_RIGHT">
+                            <Text fx:id="txtStatusND" fill="#f70000" text="" textAlignment="LEFT"/>
+                            <Button text="Thêm" onAction="#handleAddAndEdit" fx:id="btnThemSua"
+                                    style="-fx-background-color: linear-gradient(to right, #3b82f6, #2563eb); -fx-text-fill: white; -fx-pref-width: 100px;"/>
+                        </HBox>
+                    </VBox>
+
+                </content>
+            </TitledPane>
+
+            <Region style="-fx-pref-height: 200px;"/>
+        </VBox>
+
+    </ScrollPane>
+
+
+
+</VBox>

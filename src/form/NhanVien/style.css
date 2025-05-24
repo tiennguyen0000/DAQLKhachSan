@@ -1,0 +1,189 @@
+/* Thanh tìm kiếm */
+.search-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #151414;
+    -fx-background-color: transparent;
+}
+
+.search-text-field {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+.search-text-field:focused {
+    -fx-border-color: #3b82f6;
+    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.3), 5, 0, 0, 1);
+}
+
+.search-button {
+    -fx-background-color: linear-gradient(to right, #3b82f6, #2563eb);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 5px 10px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
+}
+
+.search-button:hover {
+    -fx-background-color: linear-gradient(to right, #2563eb, #1e40af);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 2);
+}
+
+.search-button:pressed {
+    -fx-background-color: linear-gradient(to right, #1e40af, #1e3a8a);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 3, 0, 0, 1);
+}
+
+/* Danh sách kết quả */
+.search-results {
+    -fx-background-color: #f3f4f6;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Form đăng ký khách hàng và form tạo hóa đơn */
+.form-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #161617;
+}
+
+.form-text-field, .form-date-picker, .form-combo-box, .form-text-area {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+.form-text-field:focused, .form-date-picker:focused, .form-combo-box:focused, .form-text-area:focused {
+    -fx-border-color: #3b82f6;
+    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.3), 5, 0, 0, 1);
+}
+
+/* Nút "Hủy" và "Xác Nhận" */
+.cancel-button {
+    -fx-background-color: #e5e7eb;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+    -fx-padding: 5px 10px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
+}
+
+.cancel-button:hover {
+    -fx-background-color: #d1d5db;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 2);
+}
+
+.cancel-button:pressed {
+    -fx-background-color: #9ca3af;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 3, 0, 0, 1);
+}
+
+.confirm-button {
+    -fx-background-color: linear-gradient(to right, #3b82f6, #2563eb);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 5px 10px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
+}
+
+.confirm-button:hover {
+    -fx-background-color: linear-gradient(to right, #2563eb, #1e40af);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 2);
+}
+
+.confirm-button:pressed {
+    -fx-background-color: linear-gradient(to right, #1e40af, #1e3a8a);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 3, 0, 0, 1);
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #D1D5DB;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.table-view .column-header {
+    -fx-background-color: #E5E7EB;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #F9FAFB;
+}
+
+.table-view .table-row-cell:even {
+    -fx-background-color: white;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #82b7dd;
+}
+.table-view .table-row-cell:filled:selected {
+    -fx-background-color: #F87171; /* đỏ nhạt */
+}
+
+.scroll-bar:vertical {
+    -fx-pref-width: 8px;
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal {
+    -fx-pref-height: 8px;
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #c7cbd5;
+    -fx-background-insets: 0;
+    -fx-background-radius: 5px;
+}
+
+.scroll-bar .track {
+    -fx-background-color: #e5e7eb;
+    -fx-background-insets: 0;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.titled-pane {
+    -fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);
+    -fx-border-color: linear-gradient(to right, #e0f2fe, #bfdbfe);
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 10;
+}
+
+.titled-pane > .title {
+    -fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);
+    -fx-text-fill: linear-gradient(to right, #e0f2fe, #bfdbfe);
+    -fx-font-weight: bold;
+    -fx-background-radius: 8 8 0 0;
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 18px;
+}
+
+.titled-pane > .content {
+    -fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);
+    -fx-border-color: linear-gradient(to right, #e0f2fe, #bfdbfe);
+    -fx-background-radius: 0 0 8 8;
+    -fx-padding: 10;
+    -fx-font-weight: normal;
+    -fx-font-size: 12px;
+}
+
+
