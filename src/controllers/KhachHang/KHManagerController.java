@@ -384,4 +384,8 @@ public class KHManagerController {
     public void checkManHinh(Boolean isBooking) {
         this.isBooking = isBooking;
     }
+
+    public void getUser() {
+
+    }
 }

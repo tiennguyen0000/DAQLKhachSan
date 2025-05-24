@@ -141,6 +141,6 @@ public class NhanVien {
     }
 
     public Boolean isManager() {
-        return this.maNV == "";
+        return this.maQL == null;
     }
 }

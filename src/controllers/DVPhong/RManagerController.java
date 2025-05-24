@@ -2,6 +2,7 @@ package controllers.DVPhong;
 
 import dao.DVPhongDAO;
 import entities.DVPhong;
+import entities.NhanVien;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 public class RManagerController {
 
+    private NhanVien nhanVien;
 
     private Stage dialogStage;
     private Runnable onSuccess;
@@ -260,5 +262,8 @@ public class RManagerController {
         timeline.play();
     }
 
+    public void setNhanVien(NhanVien nhanVien) {
+        this.nhanVien = nhanVien;
+    }
 
 }
