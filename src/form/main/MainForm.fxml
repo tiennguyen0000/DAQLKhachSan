@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.text.Text?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="mainBorderPane" prefHeight="700" prefWidth="1000"
+            style="-fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);" xmlns="http://javafx.com/javafx/17.0.12"
+      fx:controller="controllers.MainFormController" stylesheets="@styles.css">
+    <!-- Thanh điều hướng -->
+    <top>
+    <HBox alignment="CENTER" style="-fx-background-color: #2563EB; -fx-padding: 10;" styleClass="nav-bar" spacing="20">
+        <Label style="-fx-text-fill: white; -fx-font-size: 18; -fx-font-weight: bold;"
+               text="Hệ thống quản lý khách sạn" styleClass="title-label"/>
+        <Region HBox.hgrow="ALWAYS"/>
+
+        <ToggleButton onAction="#handleBookingManager"  fx:id="btnMain" style="-fx-text-fill: white; -fx-background-color: transparent;"
+                text="Đặt phòng" styleClass="nav-button"/>
+        <ToggleButton onAction="#handleRoomManagement" fx:id="btnQLP" style="-fx-text-fill: white; -fx-background-color: transparent;"
+                text="Phòng" styleClass="nav-button"/>
+        <ToggleButton onAction="#handleCustomerManager" fx:id="btnQLKH" style="-fx-text-fill: white; -fx-background-color: transparent;"
+                text="Khách hàng" styleClass="nav-button"/>
+        <ToggleButton onAction="#handleStaffManager" style="-fx-text-fill: white; -fx-background-color: transparent;"
+                text="Nhân viên" styleClass="nav-button" fx:id="btnQLNV"/>
+        <Label style="-fx-text-fill: white; -fx-padding: 0 10 0 10;" text="Lễ tân: Nguyễn Văn A" styleClass="user-label"/>
+        <Button onAction="#handleLogout" style="-fx-background-color: #DC2626; -fx-text-fill: white;" text="Đăng xuất" styleClass="logout-button"/>
+    </HBox>
+    </top>
+
+    <!-- Nội dung chính -->
+    <center>
+    <HBox spacing="20" style="-fx-padding: 30;" fx:id="mainUI">
+        <!-- Cột trái: Thống kê, trạng thái phòng, đặt phòng, thông báo -->
+        <VBox spacing="20" HBox.hgrow="ALWAYS">
+            <!-- Thống kê nhanh -->
+            <HBox spacing="10">
+                <VBox style="-fx-background-color: white; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 1);">
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 14;" text="Tỷ lệ lấp đầy"/>
+                    <Label style="-fx-font-size: 20;" text="75%"/>
+                </VBox>
+                <VBox style="-fx-background-color: white; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 1);">
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 14;" text="Doanh thu hôm nay"/>
+                    <Label style="-fx-font-size: 20;" text="15,000,000 VNĐ"/>
+                </VBox>
+                <VBox style="-fx-background-color: white; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 1);">
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 14;" text="Khách đang lưu trú"/>
+                    <Label style="-fx-font-size: 20;" text="20"/>
+                </VBox>
+            </HBox>
+
+            <!-- Trạng thái phòng -->
+            <VBox spacing="10">
+                <Label text="Tóm tắt trạng thái phòng" style="-fx-font-size: 16; -fx-font-weight: bold;" />
+                <HBox spacing="10">
+                    <VBox style="-fx-background-color: #DCFCE7; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;">
+                        <Label text="Phòng trống" style="-fx-font-weight: bold;" />
+                        <Label text="20 phòng" style="-fx-font-size: 18;" fx:id="roomsts1"/>
+                        <!--                        <Button text="Chi tiết" style="-fx-background-color: #3B82F6; -fx-text-fill: white;" onAction="#handleRoomDetails" />-->
+                    </VBox>
+                    <VBox style="-fx-background-color: #FEF9C3; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;">
+                        <Label text="Đang sử dụng" style="-fx-font-weight: bold;" />
+                        <Label text="15 phòng" style="-fx-font-size: 18;" fx:id="roomsts2"/>
+
+                    </VBox>
+                    <VBox style="-fx-background-color: #FEE2E2; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;">
+                        <Label text="Bảo trì" style="-fx-font-weight: bold;" />
+                        <Label text="5 phòng" style="-fx-font-size: 18;" fx:id="roomsts3"/>
+                    </VBox>
+                    <Label text="5 phòng" style="-fx-font-size: 18;" fx:id="roomsts4" visible="false"/>
+                </HBox>
+
+            </VBox>
+
+            <VBox prefHeight="50" prefWidth="600">
+                <children>
+                    <Label text=""/>
+                </children>
+            </VBox>
+
+            <!-- Danh sách đặt phòng gần đây -->
+            <VBox spacing="10">
+
+
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label style="-fx-font-size: 16; -fx-font-weight: bold;" text="Danh sách hóa đơn" fx:id="newHoaDon"/>
+                    <ComboBox fx:id="hoaDonFilterCombo" styleClass="filter-combo">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Tất cả"/>
+                                <String fx:value="Gần đây"/>
+                                <String fx:value="Còn hiệu lực"/>
+                                <String fx:value="Không còn hiệu lực"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+
+                    <!-- Spacer chiếm hết không gian còn lại, đẩy TextField sang phải -->
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <TextField fx:id="searchField" promptText="Tìm kiếm..." prefWidth="200" maxWidth="200"/>
+
+                </HBox>
+                <TableView fx:id="hoaDonTable" prefHeight="400" prefWidth="450" styleClass="table-view">
+                    <columns>
+                        <TableColumn fx:id="maHDColumn" text="Mã HĐ" prefWidth="80"/>
+                        <TableColumn fx:id="maNVColumn" text="Mã NV" prefWidth="80"/>
+                        <TableColumn fx:id="maKHColumn" text="Mã KH" prefWidth="80"/>
+                        <TableColumn fx:id="tinhTrangColumn" text="Tình trạng" prefWidth="100"/>
+                        <TableColumn fx:id="ngayBDColumn" text="Bắt đầu SD" prefWidth="100"/>
+                        <TableColumn fx:id="ngayKTColumn" text="Kết thúc SD" prefWidth="100"/>
+                        <TableColumn fx:id="tongTienColumn" text="Tổng tiền" prefWidth="100"/>
+                        <TableColumn fx:id="noteColumn" text="Ghi chú" prefWidth="120"/>
+                        <TableColumn fx:id="ngayTTColumn" text="Ngày thanh toán" prefWidth="100"/>
+                        <TableColumn fx:id="ngayTaoColumn" text="Ngày tạo" prefWidth="100"/>
+                        <TableColumn fx:id="soNgayColumn" text="Số ngày" prefWidth="80"/>
+                        <TableColumn fx:id="maDVPColumn" text="Mã DV Phòng" prefWidth="100"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </VBox>
+
+        <!-- Cột phải: Danh sách phòng -->
+        <VBox prefWidth="500" spacing="10" fx:id="dsp">
+            <!-- Hộp ngang chứa Label và ComboBox -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label style="-fx-font-size: 16; -fx-font-weight: bold;" text="Danh sách phòng" fx:id="newPhong"/>
+                <TextField fx:id="searchFieldfake" managed="false"/>
+                <ComboBox fx:id="phongFilterCombo" promptText="Chọn loại phòng" styleClass="filter-combo">
+                    <!-- bạn có thể thêm các item mặc định ở đây hoặc bind từ controller -->
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Tất cả"/>
+                            <String fx:value="Thường"/>
+                            <String fx:value="VIP"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+<!--                <Button text="Làm mới" onAction="#handleLamMoiPhong"/>-->
+
+
+            </HBox>
+
+            <TableView fx:id="dvPhongTable" prefHeight="600" prefWidth="600" styleClass="table-view">
+                <columns>
+                    <TableColumn fx:id="maDVColumn" text="Mã DV Phòng" prefWidth="100"/>
+                    <TableColumn fx:id="loaiPhongColumn" text="Loại phòng" prefWidth="120"/>
+                    <TableColumn fx:id="trangThaiColumn" text="Trạng thái" prefWidth="120"/>
+                    <TableColumn fx:id="donGiaColumn" text="Đơn giá" prefWidth="80"/>
+                    <TableColumn fx:id="moTaColumn" text="Mô tả" prefWidth="200"/>
+                </columns>
+            </TableView>
+
+            <!-- Button bọc trong HBox để căn phải -->
+            <HBox alignment="BOTTOM_RIGHT">
+                <Button prefHeight="40" prefWidth="120"
+                        style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 14px;"
+                        text="ĐẶT PHÒNG" onAction="#handleBooking"/>
+            </HBox>
+        </VBox>
+    </HBox>
+    </center>
+</BorderPane>
