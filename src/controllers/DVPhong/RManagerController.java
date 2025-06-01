@@ -145,7 +145,6 @@ public class RManagerController {
         txtDonGia.setText(String.format("%.0f", dVPhongSelected.getDonGia()));
         comboTrangThai.setValue(dVPhongSelected.getTrangThai());
 
-
     }
 
 
@@ -156,8 +155,6 @@ public class RManagerController {
         if (!validateInput()) {
             return;
         }
-
-
         dVPhongSelected.setLoaiPhong(txtLoaiPhong.getText());
         dVPhongSelected.setMoTa(txtMoTa.getText());
         dVPhongSelected.setDonGia(Double.parseDouble(txtDonGia.getText()));
@@ -165,15 +162,19 @@ public class RManagerController {
 
         // cái này lỏ vl nhưng cho nhanh )))
         if (infoFormID.getText().equals("Thêm phòng mới")) {
-            phongDAO.themDVPhong(dVPhongSelected);
+            if(phongDAO.themDVPhong(dVPhongSelected)) {
+                clearForm();
+            };
             showStatusNoidung("Thêm thành công!");
         } else {
-            phongDAO.suaDVPhong(dVPhongSelected);
+            if(phongDAO.suaDVPhong(dVPhongSelected)) {
+                clearForm();
+            }
             showStatusNoidung("Sửa thành công!");
         }
         // set up ve ban dau
-        clearForm();
         infoFormID.setText("Thêm phòng mới");
+        btnThemSua.setText("Thêm");
         // reload data
         dvPhongHandler.loadDatafromDB();
         dvPhongHandler.updateFilterPredicate();
@@ -249,12 +250,13 @@ public class RManagerController {
     }
 
     private void showStatusNoidung(String status) {
-        txtStatusND.setText(status);
+
         // doi mau =)
         txtStatusND.setFill(Color.RED);
         if (status.equals("Đăng ký thành công!") || status.equals("Sửa thành công!")) {
             txtStatusND.setFill(Color.GREEN);
         }
+        txtStatusND.setText(status);
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(3), event -> txtStatusND.setText(""))
         );

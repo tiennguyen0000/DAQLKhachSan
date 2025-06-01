@@ -1,0 +1,16 @@
+.card-content {
+    -fx-font-size: 1em;
+    -fx-text-fill: #555;
+    -fx-spacing: 10;
+}
+
+.filter-combo {
+    -fx-background-color: white;
+    -fx-border-color: #D1D5DB;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-font-size: 14px;
+}
+.filter-combo:hover {
+    -fx-border-color: #3B82F6;
+}

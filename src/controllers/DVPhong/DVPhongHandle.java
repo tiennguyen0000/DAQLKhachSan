@@ -50,7 +50,6 @@ public class DVPhongHandle {
             FXCollections.sort(listdVPhongCurrent, Comparator.comparing(DVPhong::getDonGia));
             filteredListHD = new FilteredList<>(listdVPhongCurrent, p -> true);
             dVPhongTable.setItems(filteredListHD);
-            System.out.println("dVPhongTable.getSelectionModel().getSelectedItem()");
         } catch (SQLException e) {
 //            showAlert(Alert.AlertType.ERROR, "Lỗi CSDL", "Không thể lấy danh sách hd: " + e.getMessage());
         }

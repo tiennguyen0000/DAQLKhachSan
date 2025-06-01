@@ -18,6 +18,21 @@ public class HoaDon {
 
     public HoaDon() {}
 
+    public HoaDon(String maNV, String maKH,
+                  Date ngayTao, Date ngayThanhToan, double tongTien, String tinhTrangTT,
+                  Date ngayBDSD, Date ngayKTSD, int soNgaySuDung, String note, String maDVP) {
+        this.maNV = maNV;
+        this.maKH = maKH;
+        this.ngayTao = ngayTao;
+        this.ngayThanhToan = ngayThanhToan;
+        this.tongTien = tongTien;
+        this.tinhTrangTT = tinhTrangTT;
+        this.ngayBDSD = ngayBDSD;
+        this.ngayKTSD = ngayKTSD;
+        this.soNgaySuDung = soNgaySuDung;
+        this.note = note;
+        this.maDVP = maDVP;
+    }
     public HoaDon(String maHD, String maNV, String maKH,
                   Date ngayTao, Date ngayThanhToan, double tongTien, String tinhTrangTT,
                   Date ngayBDSD, Date ngayKTSD, int soNgaySuDung, String note, String maDVP) {
@@ -34,6 +49,7 @@ public class HoaDon {
         this.note = note;
         this.maDVP = maDVP;
     }
+
 
     public HoaDon(String maNV, String maKH, Date ngayTao, double tongTien, String tinhTrangTT, Date ngayBDSD, Date ngayKTSD, String note, String maDVP) {
         this.maNV = maNV;

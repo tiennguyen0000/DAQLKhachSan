@@ -65,6 +65,8 @@ public class NVManagerController {
     @FXML private TextField diaChiField;
     @FXML private DatePicker ngayVaoLamPicker;
     @FXML private TextField luongField;
+    @FXML private TextField passwordVisibleField;
+    @FXML private CheckBox showPasswordCheckBox;
 //    @FXML private ComboBox chucvuComboBox;
     @FXML private TextField maQLField;
     @FXML private TextField passwordField;
@@ -84,6 +86,16 @@ public class NVManagerController {
         }
 
         initContextMenu();
+
+        passwordVisibleField.textProperty().bindBidirectional(passwordField.textProperty());
+
+        showPasswordCheckBox.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
+            passwordVisibleField.setVisible(isSelected);
+            passwordVisibleField.setManaged(isSelected);
+
+            passwordField.setVisible(!isSelected);
+            passwordField.setManaged(!isSelected);
+        });
     }
 
     public void setPhong(DVPhong dvPhong) {
@@ -197,14 +209,20 @@ public class NVManagerController {
 
         // này hơi lỏ nhưng cho nhanh )))
         if (btnThemSua.getText().equals("Thêm")) {
-            nhanVienDAO.themNhanVien(nhanVienSelected);
+            Boolean isADD = nhanVienDAO.themNhanVien(nhanVienSelected);
+            if(isADD) {
+                clearFormRegister();
+            }
             showStatusNoidung("Thêm thành công!");
         } else {
-            nhanVienDAO.capNhatNhanVien(nhanVienSelected);
+            Boolean isADD = nhanVienDAO.capNhatNhanVien(nhanVienSelected);
+            if(isADD) {
+                clearFormRegister();
+            }
             showStatusNoidung("Sửa thành công!");
         }
         // set up ve ban dau
-        clearFormRegister();
+
         infoFormID.setText("Thêm nhân viên");
         btnThemSua.setText("Thêm");
         // reload data

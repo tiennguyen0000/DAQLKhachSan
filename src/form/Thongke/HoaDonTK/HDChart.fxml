@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+
+<?import javafx.geometry.Insets?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.LineChart?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<VBox spacing="20" stylesheets="@bordercard.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12"
+      fx:controller="controllers.ThongKe.TKHDHandle" styleClass="card-content">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <HBox styleClass="chart-options" spacing="15">
+        <ComboBox fx:id="invoiceChartType" styleClass="filter-combo">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Doanh thu theo tháng trong năm" />
+                    <String fx:value="Tỉ trọng doanh thu theo loại phòng" />
+                    <String fx:value="Xu hướng doanh thu" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <ComboBox fx:id="invoiceTimeRange" styleClass="filter-combo">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Tháng này" />
+                    <String fx:value="Năm này" />
+                    <String fx:value="Toàn thời gian" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+    </HBox>
+
+
+    <!-- Biểu đồ cột -->
+    <HBox alignment="CENTER">
+        <BarChart fx:id="invoiceBarChart" legendVisible="false" prefHeight="400" prefWidth="800">
+            <xAxis>
+                <CategoryAxis fx:id="barXAxis" label="Thời gian"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="barYAxis" label="Doanh thu"/>
+            </yAxis>
+        </BarChart>
+
+        <!-- Biểu đồ tròn -->
+        <PieChart fx:id="invoicePieChart" prefHeight="400" prefWidth="800" visible="false" />
+
+        <!-- Biểu đồ đường -->
+        <LineChart fx:id="invoiceLineChart" legendVisible="false" prefHeight="400" prefWidth="800">
+            <xAxis>
+                <CategoryAxis fx:id="lineXAxis" label="Thời gian"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="lineYAxis" label="Doanh thu"/>
+            </yAxis>
+            <visible>false</visible>
+        </LineChart>
+    </HBox>
+</VBox>

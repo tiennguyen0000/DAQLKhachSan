@@ -1,12 +1,15 @@
 package dao;
 
 import entities.HoaDon;
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import util.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HoaDonDAO {
 
@@ -31,7 +34,6 @@ public class HoaDonDAO {
             stmt.setString(10, hd.getNote());
             stmt.setString(11, hd.getMaDVP());
 
-            stmt.executeUpdate();
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Lỗi: ", e.getMessage());
@@ -47,7 +49,6 @@ public class HoaDonDAO {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, maHD);
-            stmt.executeUpdate();
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Lỗi: ", e.getMessage());
@@ -77,7 +78,6 @@ public class HoaDonDAO {
             stmt.setString(11, hd.getMaDVP());
             stmt.setString(12, hd.getMaHD());
 
-            stmt.executeUpdate();
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Lỗi: ", e.getMessage());
@@ -120,7 +120,77 @@ public class HoaDonDAO {
     }
 
 
+    public Map<String, Integer> tkMonthlyProfit(String Condition) throws SQLException {
+        Map<String, Integer> thongKe = new LinkedHashMap<>();
 
+        String sql = """
+        SELECT  SUM(hd.TONGTIEN) AS tienthang, extract(month from hd.NGAYTHANHTOAN) as thang
+        FROM HOADON hd
+        """ + Condition + " GROUP BY extract(month from hd.NGAYTHANHTOAN) HAVING extract(month from hd.NGAYTHANHTOAN) is not null "
+                        + "ORDER BY extract(month from hd.NGAYTHANHTOAN)";
+
+        Platform.runLater(() -> System.out.println("1111" + sql));
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String thang = rs.getString("thang");
+                int soLuong = rs.getInt("tienthang");
+                thongKe.put(thang, soLuong);
+            }
+        }
+
+        return thongKe;
+    }
+
+    public Map<String, Integer> tkProfitRoom(String Condition) throws SQLException {
+        Map<String, Integer> thongKe = new LinkedHashMap<>();
+
+        String sql = """
+                SELECT  SUM(hd.TONGTIEN) AS profroom, p.LOAIPHONG as loaiphong
+                FROM HOADON hd, DVPHONG p
+                WHERE p.MADVP = hd.MADVP 
+        """ + Condition + " GROUP BY p.LOAIPHONG";
+
+        Platform.runLater(() -> System.out.println("2222" + sql));
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String loaiPhong = rs.getString("loaiphong");
+                int soLuong = rs.getInt("profroom");
+                thongKe.put(loaiPhong, soLuong);
+            }
+        }
+
+        return thongKe;
+    }
+
+    public Map<Integer, Integer> tkProfitLine(String Condition) throws SQLException {
+        Map<Integer, Integer> thongKe = new LinkedHashMap<>();
+
+        String sql = """
+                SELECT  SUM(hd.TONGTIEN) AS tienthang
+                FROM HOADON hd
+        """ + Condition + " GROUP BY extract(month from hd.NGAYTHANHTOAN) HAVING extract(month from hd.NGAYTHANHTOAN) is not null"
+                + " ORDER BY extract(month from hd.NGAYTHANHTOAN)";
+        Platform.runLater(() -> System.out.println("3333" + sql));
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            Integer i = 0;
+            while (rs.next()) {
+                int soLuong = rs.getInt("tienthang");
+                thongKe.put(i, soLuong);
+                i++;
+            }
+        }
+
+        return thongKe;
+    }
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

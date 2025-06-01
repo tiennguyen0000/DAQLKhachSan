@@ -107,14 +107,14 @@ public class DangNhapController {
     }
 
 
-    private void ChuyenGiaoDien(NhanVien NhanVien, ActionEvent event) throws IOException {
+    private void ChuyenGiaoDien(NhanVien nhanVien, ActionEvent event) throws IOException {
         Stage currentStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/form/main/MainForm.fxml"));
         Parent mainFormRoot = loader.load();
 
         MainFormController dashboardController = loader.getController();
-        dashboardController.setNhanVien(NhanVien);
+        dashboardController.setNhanVien(nhanVien);
 
         Stage mainStage = new Stage();
         mainStage.setTitle("Trang Chính - Hệ Thống Quản Lý Khách Sạn ANH TIẾN DT");
@@ -141,7 +141,8 @@ public class DangNhapController {
 
     public Optional<NhanVien> KiemTraDangNhapCSDL(String maNV, String matKhau) {
         String sql = "SELECT * " +
-                "from NHANVIEN where manv = 'MANV01' and password = 'MK0'";
+                "from NHANVIEN where manv = 'MANV01' and password = 'MK1'";
+
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

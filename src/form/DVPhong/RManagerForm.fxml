@@ -87,9 +87,9 @@
                                       GridPane.rowIndex="3" GridPane.columnIndex="1">
                                 <items>
                                     <FXCollections fx:factory="observableArrayList">
-                                        <String fx:value="trống"/>
-                                        <String fx:value="đã được đặt"/>
-                                        <String fx:value="bảo trì"/>
+                                        <String fx:value="Trống"/>
+                                        <String fx:value="Đã được đặt"/>
+                                        <String fx:value="Bảo trì"/>
                                     </FXCollections>
                                 </items>
                             </ComboBox>

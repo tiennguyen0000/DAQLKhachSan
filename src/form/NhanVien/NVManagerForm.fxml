@@ -52,7 +52,7 @@
               VBox.vgrow="ALWAYS">
 
 
-            <TitledPane text="Thêm nhân viên" expanded="false" fx:id="infoFormID"
+            <TitledPane text="Thêm nhân viên" expanded="true" fx:id="infoFormID"
                         style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #161617; -fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);"
                         styleClass="titled-pane">
                 <content>
@@ -110,12 +110,20 @@
 
                             <Label text="Mật khẩu:" minWidth="100"/>
                             <PasswordField fx:id="passwordField" promptText="Nhập mật khẩu" prefWidth="180"/>
+                            <TextField fx:id="passwordVisibleField" promptText="Nhập mật khẩu" prefWidth="180" visible="false" managed="false"/>
+
                         </HBox>
+<!--                        <HBox spacing="20" alignment="CENTER_LEFT">-->
+<!--                            <CheckBox fx:id="showPasswordCheckBox" text="Hiện mật khẩu"/>-->
+<!--                        </HBox>-->
+
 
                         <!-- Hàng 6: Mã quản lý -->
                         <HBox spacing="20" alignment="CENTER_LEFT">
                             <Label text="Mã QL:" minWidth="80"/>
                             <TextField fx:id="maQLField" promptText="VD: QL01" prefWidth="180"/>
+                            <Region prefWidth="100"/>
+                            <CheckBox fx:id="showPasswordCheckBox" text="Hiện mật khẩu"/>
 
 
                         </HBox>

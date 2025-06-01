@@ -11,17 +11,17 @@ import java.util.List;
 public class KhachHangDAO {
 
     public boolean themKhachHang(KhachHang kh) throws SQLException {
-        String sql = "INSERT INTO KHACHHANG (MAKH, HOTEN, CCCD, SDT, NGAYSINH, GIOITINH, DIACHI, EMAIL) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "THEM_KHACHHANG (?, ?, ?, ?, ?, ?, ?);";
+        sql = "BEGIN " + sql + " END;";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, kh.getMaKH());
-            stmt.setString(2, kh.getHoTen());
-            stmt.setString(3, kh.getCccd());
-            stmt.setString(4, kh.getSdt());
-            stmt.setDate(5, kh.getNgaySinh());
-            stmt.setString(6, kh.getGioiTinh());
-            stmt.setString(7, kh.getDiaChi());
-            stmt.setString(8, kh.getEmail());
+            stmt.setString(1, kh.getHoTen());
+            stmt.setString(2, kh.getCccd());
+            stmt.setString(3, kh.getSdt());
+            stmt.setDate(4, kh.getNgaySinh());
+            stmt.setString(5, kh.getGioiTinh());
+            stmt.setString(6, kh.getDiaChi());
+            stmt.setString(7, kh.getEmail());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Lỗi: ", e.getMessage());
@@ -30,7 +30,8 @@ public class KhachHangDAO {
     }
 
     public boolean xoaKhachHang(String maKH) throws SQLException {
-        String sql = "DELETE FROM KHACHHANG WHERE MAKH = ?";
+        String sql = "XOA_KHACHHANG(?);";
+        sql = "BEGIN " + sql + " END;";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, maKH);
@@ -42,17 +43,18 @@ public class KhachHangDAO {
     }
 
     public boolean suaKhachHang(KhachHang kh) throws SQLException {
-        String sql = "UPDATE KHACHHANG SET HOTEN = ?, CCCD = ?, SDT = ?, NGAYSINH = ?, GIOITINH = ?, DIACHI = ?, EMAIL = ? WHERE MAKH = ?";
+        String sql = "CAPNHAT_KHACHHANG(?,?,?,?,?,?,?,?);";
+        sql = "BEGIN " + sql + " END;";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, kh.getHoTen());
-            stmt.setString(2, kh.getCccd());
-            stmt.setString(3, kh.getSdt());
-            stmt.setDate(4, kh.getNgaySinh());
-            stmt.setString(5, kh.getGioiTinh());
-            stmt.setString(6, kh.getDiaChi());
-            stmt.setString(7, kh.getEmail());
-            stmt.setString(8, kh.getMaKH());
+            stmt.setString(2, kh.getHoTen());
+            stmt.setString(3, kh.getCccd());
+            stmt.setString(4, kh.getSdt());
+            stmt.setDate(5, kh.getNgaySinh());
+            stmt.setString(6, kh.getGioiTinh());
+            stmt.setString(7, kh.getDiaChi());
+            stmt.setString(8, kh.getEmail());
+            stmt.setString(1, kh.getMaKH());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Lỗi: ", e.getMessage());

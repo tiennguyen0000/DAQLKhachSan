@@ -24,7 +24,9 @@
                 text="Khách hàng" styleClass="nav-button"/>
         <ToggleButton onAction="#handleStaffManager" style="-fx-text-fill: white; -fx-background-color: transparent;"
                 text="Nhân viên" styleClass="nav-button" fx:id="btnQLNV"/>
-        <Label style="-fx-text-fill: white; -fx-padding: 0 10 0 10;" text="Lễ tân: Nguyễn Văn A" styleClass="user-label"/>
+        <ToggleButton onAction="#handleReport" style="-fx-text-fill: white; -fx-background-color: transparent;"
+                      text="Thống kê" styleClass="nav-button" fx:id="btnTK"/>
+        <Label style="-fx-text-fill: white; -fx-padding: 0 10 0 10;" fx:id="namenvID" text="Lễ tân: Nguyễn Văn A" styleClass="user-label"/>
         <Button onAction="#handleLogout" style="-fx-background-color: #DC2626; -fx-text-fill: white;" text="Đăng xuất" styleClass="logout-button"/>
     </HBox>
     </top>
@@ -92,7 +94,7 @@
                                 <String fx:value="Tất cả"/>
                                 <String fx:value="Gần đây"/>
                                 <String fx:value="Còn hiệu lực"/>
-                                <String fx:value="Không còn hiệu lực"/>
+                                <String fx:value="Hết hiệu lực"/>
                             </FXCollections>
                         </items>
                     </ComboBox>

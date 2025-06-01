@@ -11,9 +11,8 @@ import java.util.List;
 public class NhanVienDAO {
 
     public Boolean themNhanVien(NhanVien nv) throws SQLException {
-        String sql = "INSERT INTO NHANVIEN (HOTEN, PASSWORD, CCCD, SDT, NGAYSINH, GIOITINH, DIACHI, EMAIL, NGAYVAOLAM, LUONG, CHUCVU, MAQL) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+        String sql = "THEM_NHANVIEN(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        sql = "BEGIN " + sql + " END;";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nv.getHoTen());
@@ -38,9 +37,8 @@ public class NhanVienDAO {
     }
 
     public Boolean capNhatNhanVien(NhanVien nv) throws SQLException {
-        String sql = "UPDATE NHANVIEN SET HOTEN = ?, PASSWORD = ?, CCCD = ?, SDT = ?, NGAYSINH = ?, GIOITINH = ?, DIACHI = ?, " +
-                "EMAIL = ?, NGAYVAOLAM = ?, LUONG = ?, CHUCVU = ?, MAQL = ? WHERE MANV = ?";
-
+        String sql = "CAPNHAT_NHANVIEN(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        sql = "BEGIN " + sql + " END;";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -67,13 +65,14 @@ public class NhanVienDAO {
     }
 
     public Boolean xoaNhanVien(String maNV) throws SQLException {
-        String sql = "DELETE FROM NHANVIEN WHERE MANV = ?";
-
+        String sql = "XOA_NHANVIEN(?);";
+        sql = "BEGIN " + sql + " END;";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, maNV);
             stmt.executeUpdate();
+
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Lỗi: ", e.getMessage());

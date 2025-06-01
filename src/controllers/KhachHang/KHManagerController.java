@@ -67,6 +67,8 @@ public class KHManagerController {
     @FXML private TextField emailField;
     @FXML private TitledPane infoFormID;
     @FXML private Button btnThemSua;
+    @FXML private PasswordField passwordField;
+    @FXML private CheckBox showPasswordCheckBox;
 
     private KhachHang khachHangSelected;
 
@@ -180,7 +182,7 @@ public class KHManagerController {
         }
 
         khachHangSelected.setCccd(cccdField.getText());
-        khachHangSelected.setEmail(emailField.getText());
+        khachHangSelected.setEmail(emailField.getText().trim());
         khachHangSelected.setGioiTinh(genderComboBox.getValue());
         khachHangSelected.setHoTen(fullNameField.getText());
         khachHangSelected.setNgaySinh(java.sql.Date.valueOf(dobPicker.getValue()));
@@ -189,11 +191,11 @@ public class KHManagerController {
 
         // này hơi lỏ nhưng cho nhanh )))
         if (btnThemSua.getText().equals("Đăng ký")) {
-            khachHangDAO.themKhachHang(khachHangSelected);
-            showStatusNoidung("Đăng ký thành công!");
+            if (khachHangDAO.themKhachHang(khachHangSelected)) showStatusNoidung("Đăng ký thành công!");
+            else clearFormRegister();
         } else {
-            khachHangDAO.suaKhachHang(khachHangSelected);
-            showStatusNoidung("Sửa thành công!");
+            if (khachHangDAO.suaKhachHang(khachHangSelected)) showStatusNoidung("Sửa thành công!");
+            else clearFormRegister();
         }
         // set up ve ban dau
         clearFormRegister();
@@ -228,20 +230,22 @@ public class KHManagerController {
 
         LocalDate checkIn = checkInDate.getValue();
         LocalDate checkOut = checkOutDate.getValue();
-        long daysBetween = ChronoUnit.DAYS.between(checkIn, checkOut);
-        double tongTien = (daysBetween - 1.0) * dvPhong.getDonGia();
+        long daysBetween = ChronoUnit.DAYS.between(checkIn, checkOut) + 1;
+        double tongTien = daysBetween * dvPhong.getDonGia();
         String tinhTrangTT = "Còn hiệu lực";
         String note = notesArea.getText().trim();
 
-        HoaDon hoaDon = new HoaDon(maNV, maKH, ngayTao, tongTien, tinhTrangTT, ngayBDSD, ngayKTSD, note, maDVP);
+        HoaDon hoaDon = new HoaDon(maNV, maKH, ngayTao, null, tongTien, tinhTrangTT, ngayBDSD, ngayKTSD, (int)daysBetween, note, maDVP);
 
+//        String maHD, String maNV, String maKH,
+//                Date ngayTao, Date ngayThanhToan, double tongTien, String tinhTrangTT,
+//                Date ngayBDSD, Date ngayKTSD, int soNgaySuDung, String note, String maDVP
         hoaDonDAO.themHoaDon(hoaDon);
         clearFormRegister();
         // gọi callback về controller gốc
         if (onSuccess != null) {
             dialogStage.close();
             onSuccess.run();
-
         }
     }
 
@@ -258,9 +262,8 @@ public class KHManagerController {
     private void tongTienCaculation() {
         LocalDate checkIn = checkInDate.getValue();
         LocalDate checkOut = checkOutDate.getValue();
-        long daysBetween = ChronoUnit.DAYS.between(checkIn, checkOut);
+        long daysBetween = ChronoUnit.DAYS.between(checkIn, checkOut) + 1;
         tongTienid.setText(daysBetween * dvPhong.getDonGia() + " VND");
-
     }
 
     public void setNhanVien(NhanVien nhanVien) {
@@ -283,11 +286,11 @@ public class KHManagerController {
 
     private void setupInfoBookingForm() {
         LocalDate today = LocalDate.now();
-        LocalDate tomorrow = today.plusDays(1);
+//        LocalDate tomorrow = today.plusDays(1);
 
         // Đặt mặc định
         checkInDate.setValue(today);
-        checkOutDate.setValue(tomorrow);
+        checkOutDate.setValue(today);
 
         // Ràng buộc: check-in >= hôm nay
         checkInDate.setDayCellFactory(picker -> new DateCell() {
@@ -303,7 +306,7 @@ public class KHManagerController {
             @Override
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
-                setDisable(empty || date.isBefore(tomorrow));
+                setDisable(empty || date.isBefore(today));
             }
         });
 
@@ -380,12 +383,9 @@ public class KHManagerController {
         return true;
     }
 
-    // hơi lỏ, cái này để check màn hình, code này lỡ thiết kế v r lười chỉnh lại quá
+    // hơi lỏ, cái này để check màn hình nhằm bỏ tính bớt tính năng
     public void checkManHinh(Boolean isBooking) {
         this.isBooking = isBooking;
     }
 
-    public void getUser() {
-
-    }
 }

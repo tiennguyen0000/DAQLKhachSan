@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.LineChart?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ThongKe.ReportController"
+      stylesheets="@style.css"
+      alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to right, #e0f2fe, #bfdbfe);">
+    <!-- Header -->
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Báo cáo - Thống kê" alignment="TOP_CENTER"
+           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+
+    <!-- Controls -->
+
+
+    <!-- Dashboards -->
+    <VBox fx:id="invoicesDashboard" styleClass="dashboard" spacing="20" prefWidth="800" prefHeight="800">
+        <Pane styleClass="card">
+            <VBox spacing="15">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <ToggleButton text="Hóa đơn"    styleClass="tab-button" onAction="#handleTKHD" fx:id="btnTKHD"/>
+                    <ToggleButton text="Phòng"  styleClass="tab-button" onAction="#handleTKP"/>
+                    <ToggleButton text="Khách hàng"  styleClass="tab-button" onAction="#handleTKKH" />
+                    <ToggleButton text="Nhân viên" styleClass="tab-button" onAction="#handleTKNV"/>
+                </HBox>
+
+                <BorderPane prefHeight="-1" prefWidth="-1" fx:id="TKBorderPane">
+
+                    <center>
+<!--                        <VBox styleClass="card-content" spacing="20">-->
+<!--                            <padding>-->
+<!--                                <Insets top="20" right="20" bottom="20" left="20"/>-->
+<!--                            </padding>-->
+<!--                            <HBox styleClass="chart-options" spacing="15">-->
+<!--                                <ComboBox fx:id="invoiceChartType" styleClass="filter-combo">-->
+<!--                                    <items>-->
+<!--                                        <FXCollections fx:factory="observableArrayList">-->
+<!--                                            <String fx:value="Doanh thu theo tháng" />-->
+<!--                                            <String fx:value="Tỉ trọng doanh thu theo loại phòng" />-->
+<!--                                            <String fx:value="Xu hướng doanh thu theo quý" />-->
+<!--                                        </FXCollections>-->
+<!--                                    </items>-->
+<!--                                </ComboBox>-->
+<!--                                <ComboBox fx:id="invoiceTimeRange" styleClass="filter-combo">-->
+<!--                                    <items>-->
+<!--                                        <FXCollections fx:factory="observableArrayList">-->
+<!--                                            <String fx:value="Theo tháng" />-->
+<!--                                            <String fx:value="Theo năm" />-->
+<!--                                            <String fx:value="Toàn thời gian" />-->
+<!--                                        </FXCollections>-->
+<!--                                    </items>-->
+<!--                                </ComboBox>-->
+<!--                            </HBox>-->
+
+<!--                            &lt;!&ndash; Biểu đồ cột &ndash;&gt;-->
+<!--                            <BarChart fx:id="invoiceBarChart" legendVisible="false" prefHeight="300" prefWidth="800">-->
+<!--                                <xAxis>-->
+<!--                                    <CategoryAxis fx:id="barXAxis" label="Tháng hoặc Loại phòng"/>-->
+<!--                                </xAxis>-->
+<!--                                <yAxis>-->
+<!--                                    <NumberAxis fx:id="barYAxis" label="Số lượng/Doanh thu"/>-->
+<!--                                </yAxis>-->
+<!--                            </BarChart>-->
+
+<!--                            &lt;!&ndash; Biểu đồ tròn &ndash;&gt;-->
+<!--                            <PieChart fx:id="invoicePieChart" prefHeight="300" prefWidth="800" visible="false" />-->
+
+<!--                            &lt;!&ndash; Biểu đồ đường &ndash;&gt;-->
+<!--                            <LineChart fx:id="invoiceLineChart" legendVisible="false" prefHeight="300" prefWidth="800">-->
+<!--                                <xAxis>-->
+<!--                                    <CategoryAxis fx:id="lineXAxis" label="Thời gian"/>-->
+<!--                                </xAxis>-->
+<!--                                <yAxis>-->
+<!--                                    <NumberAxis fx:id="lineYAxis" label="Giá trị"/>-->
+<!--                                </yAxis>-->
+<!--                                <visible>false</visible>-->
+<!--                            </LineChart>-->
+<!--                        </VBox>-->
+                    </center>
+
+                </BorderPane>
+
+            </VBox>
+        </Pane>
+    </VBox>
+
+
+
+
+</VBox>
