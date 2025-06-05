@@ -1,20 +1,39 @@
 package util;
 
+import oracle.jdbc.OracleStatement;
+import oracle.jdbc.dcn.*;
+import oracle.jdbc.driver.OracleConnection;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.*;
 
 public class DatabaseConnection {
     // --- THÔNG SỐ KẾT NỐI CSDL ORACLE CỦA BẠN ---
     private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl"; // URL Oracle của bạn
     private static final String DB_USER = "dahqt1"; // Tên người dùng DB của bạn
     private static final String DB_PASSWORD = "pass"; // Mật khẩu DB của bạn
+    public static Map<String, Boolean> isChangeData = new HashMap<>();
+
+    static {
+        isChangeData.put("KHACHHANG", false);
+        isChangeData.put("NHANVIEN", false);
+        isChangeData.put("HOADON", false);
+        isChangeData.put("PHONG", false);
+    }
+
+
     // --- KẾT THÚC PHẦN THÔNG SỐ ---
 
     public static Connection getConnection() {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            connection.setAutoCommit(false);
+//            connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+
         } catch (SQLException e) {
             System.err.println("LỖI KẾT NỐI CƠ SỞ DỮ LIỆU:");
             System.err.println("URL: " + DB_URL);
@@ -28,7 +47,8 @@ public class DatabaseConnection {
         return connection;
     }
     
-    public static void main(String[] args) { //Có thể chạy hàm main này để kiểm tra kết nối, không liên quan code chính
+
+    public static void main(String[] args) throws SQLException {
         System.out.println("Đang thực hiện kiểm tra kết nối đến Oracle Database...");
         // Không nên in mật khẩu ra console trong môi trường production
 
@@ -49,5 +69,8 @@ public class DatabaseConnection {
             System.err.println("3. Firewall có đang chặn kết nối đến cổng của Oracle Database không.");
             System.err.println("4. File JAR của Oracle JDBC driver đã được thêm vào thư viện (classpath) của project chưa.");
         }
+    }
+    public void setIsChangeData(String tableName, boolean isChangeData) {
+        this.isChangeData.put(tableName, isChangeData);
     }
 }
